@@ -2,4 +2,4 @@
 
 # TODO
 
-* [ ] check if files exists
+* [x] check if files exists
