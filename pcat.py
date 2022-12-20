@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+import sys
+from rich import print as rprint
 import os
 import argparse
 parser = argparse.ArgumentParser()
@@ -10,6 +13,9 @@ args = parser.parse_args()
 def main():
     files = args.files
     for current_file in files:
+        if not os.path.exists(current_file):
+            rprint(f"[red]\[pcat error][/red]: \"{current_file}\": No such file or directory (os error 2)")
+            sys.exit(2)
         with open(current_file, "r") as file:
             lines = file.readlines()
             if args.banner:
@@ -20,7 +26,6 @@ def main():
                 line = line.replace("\n","")
                 line = f"{line}$" if args.ends else line
                 print(f"{number} {line}" if args.number else line)
-
 
 if __name__ == "__main__":
     main()
