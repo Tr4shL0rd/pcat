@@ -10,12 +10,16 @@ parser.add_argument("-n", "--number", dest="number", action="store_true", help="
 parser.add_argument("-e", "--show-ends", dest="ends", action="store_true", help="displays $ at the end of each line")
 
 args = parser.parse_args()
+def check_files(files:list):
+    for file in files:
+        if not os.path.exists(file):
+            rprint(f"[red]\[pcat error][/red]: \"{file}\": No such file or directory (os error 1)")
+            sys.exit(1)
+        
 def main():
     files = args.files
+    check_files(files)
     for current_file in files:
-        if not os.path.exists(current_file):
-            rprint(f"[red]\[pcat error][/red]: \"{current_file}\": No such file or directory (os error 2)")
-            sys.exit(2)
         with open(current_file, "r") as file:
             lines = file.readlines()
             if args.banner:
