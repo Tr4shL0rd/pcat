@@ -4,7 +4,7 @@ from rich import print as rprint
 import os
 import argparse
 import edited_imghdr
-from image import DrawImage
+from edited_image import DrawImage
 from typing import List
 import PIL
 
